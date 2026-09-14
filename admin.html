@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LankaExplore | Admin Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:#080808;
+    color:#fff;
+    min-height:100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100vh;
+    background:#111;
+    border-right:1px solid #292929;
+    padding:25px 18px;
+    z-index:1000;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:800;
+    margin-bottom:40px;
+    padding-left:10px;
+}
+
+.logo span{
+    color:#ff7a00;
+}
+
+.admin-badge{
+    background:#1c1c1c;
+    border:1px solid #333;
+    border-radius:12px;
+    padding:14px;
+    margin-bottom:25px;
+}
+
+.admin-badge small{
+    color:#888;
+    display:block;
+    font-size:11px;
+}
+
+.admin-badge strong{
+    font-size:14px;
+}
+
+.menu{
+    list-style:none;
+}
+
+.menu li{
+    margin-bottom:8px;
+}
+
+.menu button{
+    width:100%;
+    border:none;
+    background:transparent;
+    color:#aaa;
+    padding:13px 15px;
+    border-radius:10px;
+    text-align:left;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:14px;
+    transition:.3s;
+}
+
+.menu button:hover,
+.menu button.active{
+    background:#ff7a00;
+    color:#fff;
+}
+
+.logout{
+    position:absolute;
+    bottom:25px;
+    left:18px;
+    right:18px;
+}
+
+.logout button{
+    width:100%;
+    padding:12px;
+    border:1px solid #ff7a00;
+    border-radius:10px;
+    background:transparent;
+    color:#ff7a00;
+    cursor:pointer;
+    font-family:inherit;
+    font-weight:600;
+}
+
+.logout button:hover{
+    background:#ff7a00;
+    color:white;
+}
+
+/* MAIN */
+.main{
+    margin-left:250px;
+    padding:30px;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.topbar h1{
+    font-size:28px;
+}
+
+.topbar p{
+    color:#888;
+    font-size:13px;
+}
+
+.profile{
+    background:#151515;
+    padding:10px 15px;
+    border-radius:10px;
+    border:1px solid #292929;
+}
+
+/* SECTIONS */
+.section{
+    display:none;
+}
+
+.section.active{
+    display:block;
+}
+
+/* STATS */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:20px;
+    margin-bottom:30px;
+}
+
+.stat-card{
+    background:#151515;
+    border:1px solid #292929;
+    border-radius:16px;
+    padding:22px;
+    transition:.3s;
+}
+
+.stat-card:hover{
+    transform:translateY(-4px);
+    border-color:#ff7a00;
+}
+
+.stat-icon{
+    font-size:28px;
+    margin-bottom:12px;
+}
+
+.stat-card h3{
+    font-size:28px;
+    margin-bottom:4px;
+}
+
+.stat-card p{
+    color:#888;
+    font-size:13px;
+}
+
+/* CARD */
+.card{
+    background:#151515;
+    border:1px solid #292929;
+    border-radius:16px;
+    padding:25px;
+    margin-bottom:25px;
+}
+
+.card-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.card-header h2{
+    font-size:19px;
+}
+
+.search{
+    background:#0c0c0c;
+    border:1px solid #333;
+    color:white;
+    padding:10px 14px;
+    border-radius:8px;
+    outline:none;
+}
+
+.search:focus{
+    border-color:#ff7a00;
+}
+
+/* TABLE */
+.table-wrap{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:700px;
+}
+
+th,td{
+    padding:14px 12px;
+    text-align:left;
+    border-bottom:1px solid #292929;
+    font-size:13px;
+}
+
+th{
+    color:#ff9d42;
+    font-weight:600;
+}
+
+td{
+    color:#ddd;
+}
+
+.status{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    background:#17351e;
+    color:#63d471;
+    font-size:11px;
+}
+
+.delete-btn{
+    border:none;
+    background:#321515;
+    color:#ff6666;
+    padding:7px 11px;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+.delete-btn:hover{
+    background:#ff4444;
+    color:white;
+}
+
+/* DESTINATIONS */
+.destination-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+}
+
+.destination{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:14px;
+    overflow:hidden;
+}
+
+.destination img{
+    width:100%;
+    height:160px;
+    object-fit:cover;
+}
+
+.destination-info{
+    padding:15px;
+}
+
+.destination-info h3{
+    margin-bottom:5px;
+}
+
+.destination-info p{
+    color:#888;
+    font-size:12px;
+}
+
+/* EMPTY */
+.empty{
+    text-align:center;
+    padding:40px;
+    color:#777;
+}
+
+/* MOBILE */
+.mobile-top{
+    display:none;
+}
+
+@media(max-width:1000px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .destination-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:700px){
+
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.3s;
+    }
+
+    .sidebar.open{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        padding:20px;
+        padding-top:80px;
+    }
+
+    .mobile-top{
+        display:flex;
+        position:fixed;
+        top:0;
+        left:0;
+        right:0;
+        height:60px;
+        background:#111;
+        border-bottom:1px solid #292929;
+        align-items:center;
+        padding:0 20px;
+        z-index:900;
+    }
+
+    .menu-toggle{
+        border:none;
+        background:none;
+        color:white;
+        font-size:25px;
+        cursor:pointer;
+        margin-right:15px;
+    }
+
+    .mobile-logo{
+        font-weight:800;
+    }
+
+    .mobile-logo span{
+        color:#ff7a00;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .destination-grid{
+        grid-template-columns:1fr;
+    }
+
+    .topbar{
+        align-items:flex-start;
+        gap:10px;
+    }
+
+    .topbar h1{
+        font-size:22px;
+    }
+
+    .profile{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- MOBILE TOP -->
+<div class="mobile-top">
+    <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+    <div class="mobile-logo">
+        Lanka<span>Explore</span>
+    </div>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+
+    <div class="logo">
+        Lanka<span>Explore</span>
+    </div>
+
+    <div class="admin-badge">
+        <small>LOGGED IN AS</small>
+        <strong id="adminName">Administrator</strong>
+    </div>
+
+    <ul class="menu">
+
+        <li>
+            <button class="active" onclick="showSection('dashboard',this)">
+                📊 Dashboard
+            </button>
+        </li>
+
+        <li>
+            <button onclick="showSection('users',this)">
+                👥 Users
+            </button>
+        </li>
+
+        <li>
+            <button onclick="showSection('bookings',this)">
+                📅 Bookings
+            </button>
+        </li>
+
+        <li>
+            <button onclick="showSection('destinations',this)">
+                🗺️ Destinations
+            </button>
+        </li>
+
+        <li>
+            <button onclick="showSection('messages',this)">
+                💬 Messages
+            </button>
+        </li>
+
+    </ul>
+
+    <div class="logout">
+        <button onclick="logout()">🚪 Logout</button>
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- TOPBAR -->
+    <div class="topbar">
+        <div>
+            <h1 id="pageTitle">Dashboard</h1>
+            <p>Welcome to LankaExplore administration panel.</p>
+        </div>
+
+        <div class="profile">
+            👤 <span id="profileName">Admin</span>
+        </div>
+    </div>
+
+
+    <!-- ================= DASHBOARD ================= -->
+    <section id="dashboard" class="section active">
+
+        <div class="stats">
+
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <h3 id="userCount">0</h3>
+                <p>Total Users</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📅</div>
+                <h3 id="bookingCount">0</h3>
+                <p>Total Bookings</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🗺️</div>
+                <h3>8</h3>
+                <p>Destinations</p>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">💬</div>
+                <h3 id="messageCount">0</h3>
+                <p>Messages</p>
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-header">
+                <h2>Recent Bookings</h2>
+
+                <button
+                    onclick="showSectionByName('bookings')"
+                    style="background:#ff7a00;color:white;border:0;padding:9px 14px;border-radius:8px;cursor:pointer;">
+                    View All
+                </button>
+            </div>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>Destination</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Date</th>
+                            <th>Travelers</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="recentBookings"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= USERS ================= -->
+    <section id="users" class="section">
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h2>Registered Users</h2>
+
+                <input
+                    type="text"
+                    class="search"
+                    id="userSearch"
+                    placeholder="Search users..."
+                    onkeyup="renderUsers()">
+
+            </div>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="usersTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= BOOKINGS ================= -->
+    <section id="bookings" class="section">
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h2>All Bookings</h2>
+
+                <input
+                    type="text"
+                    class="search"
+                    id="bookingSearch"
+                    placeholder="Search bookings..."
+                    onkeyup="renderBookings()">
+
+            </div>
+
+            <div class="table-wrap">
+
+                <table>
+
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Destination</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Date</th>
+                            <th>Travelers</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="bookingsTable"></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= DESTINATIONS ================= -->
+    <section id="destinations" class="section">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h2>LankaExplore Destinations</h2>
+            </div>
+
+            <div class="destination-grid">
+
+                <div class="destination">
+                    <img src="images/sigiriya.jpg">
+                    <div class="destination-info">
+                        <h3>Sigiriya</h3>
+                        <p>Ancient rock fortress</p>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <img src="images/kandy.jpg">
+                    <div class="destination-info">
+                        <h3>Kandy</h3>
+                        <p>Cultural capital of Sri Lanka</p>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <img src="images/nuwara.jpg">
+                    <div class="destination-info">
+                        <h3>Nuwara Eliya</h3>
+                        <p>Tea country & cool climate</p>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <img src="images/ella.jpg">
+                    <div class="destination-info">
+                        <h3>Ella</h3>
+                        <p>Mountains and waterfalls</p>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <img src="images/yala.jpg">
+                    <div class="destination-info">
+                        <h3>Yala</h3>
+                        <p>Wildlife and safari</p>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <img src="images/galle.jpg">
+                    <div class="destination-info">
+                        <h3>Galle</h3>
+                        <p>Historic Dutch Fort</p>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <img src="images/mirissa.jpg">
+                    <div class="destination-info">
+                        <h3>Mirissa</h3>
+                        <p>Beach and whale watching</p>
+                    </div>
+                </div>
+
+                <div class="destination">
+                    <img src="images/colombo.jpg">
+                    <div class="destination-info">
+                        <h3>Colombo</h3>
+                        <p>Modern city life</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MESSAGES ================= -->
+    <section id="messages" class="section">
+
+        <div class="card">
+
+            <div class="card-header">
+                <h2>Messages</h2>
+            </div>
+
+            <div class="empty">
+                💬
+                <br><br>
+                No messages available yet.
+                <br>
+                <small>Messages received from the website will appear here.</small>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script>
+
+/* =========================================
+   AUTHENTICATION CHECK
+========================================= */
+
+const currentUser =
+    JSON.parse(localStorage.getItem("lankaUser") || "null");
+
+if(
+    !currentUser ||
+    currentUser.role !== "admin"
+){
+    alert("Access denied. Admin login required.");
+    window.location.href = "login.html";
+}
+
+
+/* =========================================
+   ADMIN INFORMATION
+========================================= */
+
+if(currentUser){
+
+    const name =
+        currentUser.name ||
+        "Administrator";
+
+    document.getElementById("adminName").textContent = name;
+    document.getElementById("profileName").textContent = name;
+}
+
+
+/* =========================================
+   GET DATA
+========================================= */
+
+function getBookings(){
+
+    return JSON.parse(
+        localStorage.getItem("lankaBookings") || "[]"
+    );
+
+}
+
+function getUsers(){
+
+    return JSON.parse(
+        localStorage.getItem("lankaUsers") || "[]"
+    );
+
+}
+
+
+/* =========================================
+   UPDATE DASHBOARD
+========================================= */
+
+function updateDashboard(){
+
+    const bookings = getBookings();
+    const users = getUsers();
+
+    document.getElementById("bookingCount").textContent =
+        bookings.length;
+
+    document.getElementById("userCount").textContent =
+        users.length;
+
+    document.getElementById("messageCount").textContent =
+        0;
+
+    renderRecentBookings();
+}
+
+
+/* =========================================
+   RECENT BOOKINGS
+========================================= */
+
+function renderRecentBookings(){
+
+    const bookings = getBookings();
+
+    const table =
+        document.getElementById("recentBookings");
+
+    table.innerHTML = "";
+
+    if(bookings.length === 0){
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="5" class="empty">
+                    No bookings yet.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+    const recent =
+        bookings.slice(-5).reverse();
+
+    recent.forEach(booking => {
+
+        table.innerHTML += `
+            <tr>
+
+                <td>
+                    ${booking.place || "-"}
+                </td>
+
+                <td>
+                    ${booking.name || "-"}
+                </td>
+
+                <td>
+                    ${booking.email || "-"}
+                </td>
+
+                <td>
+                    ${booking.date || "-"}
+                </td>
+
+                <td>
+                    ${booking.travelers || "-"}
+                </td>
+
+            </tr>
+        `;
+
+    });
+
+}
+
+
+/* =========================================
+   USERS
+========================================= */
+
+function renderUsers(){
+
+    const users =
+        getUsers();
+
+    const search =
+        document.getElementById("userSearch")
+        .value
+        .toLowerCase();
+
+    const table =
+        document.getElementById("usersTable");
+
+    table.innerHTML = "";
+
+    const filtered =
+        users.filter(user =>
+
+            (user.name || "")
+            .toLowerCase()
+            .includes(search)
+
+            ||
+
+            (user.email || "")
+            .toLowerCase()
+            .includes(search)
+
+        );
+
+
+    if(filtered.length === 0){
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="4" class="empty">
+                    No users found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    filtered.forEach((user,index) => {
+
+        table.innerHTML += `
+            <tr>
+
+                <td>${index + 1}</td>
+
+                <td>
+                    ${user.name || "-"}
+                </td>
+
+                <td>
+                    ${user.email || "-"}
+                </td>
+
+                <td>
+                    <span class="status">
+                        ${user.role || "user"}
+                    </span>
+                </td>
+
+            </tr>
+        `;
+
+    });
+
+}
+
+
+/* =========================================
+   BOOKINGS
+========================================= */
+
+function renderBookings(){
+
+    const bookings =
+        getBookings();
+
+    const search =
+        document.getElementById("bookingSearch")
+        .value
+        .toLowerCase();
+
+    const table =
+        document.getElementById("bookingsTable");
+
+    table.innerHTML = "";
+
+
+    const filtered =
+        bookings.filter(booking =>
+
+            (booking.name || "")
+            .toLowerCase()
+            .includes(search)
+
+            ||
+
+            (booking.email || "")
+            .toLowerCase()
+            .includes(search)
+
+            ||
+
+            (booking.place || "")
+            .toLowerCase()
+            .includes(search)
+
+        );
+
+
+    if(filtered.length === 0){
+
+        table.innerHTML = `
+            <tr>
+                <td colspan="7" class="empty">
+                    No bookings found.
+                </td>
+            </tr>
+        `;
+
+        return;
+    }
+
+
+    filtered.forEach((booking,index) => {
+
+        const realIndex =
+            bookings.indexOf(booking);
+
+        table.innerHTML += `
+
+            <tr>
+
+                <td>${index + 1}</td>
+
+                <td>
+                    ${booking.place || "-"}
+                </td>
+
+                <td>
+                    ${booking.name || "-"}
+                </td>
+
+                <td>
+                    ${booking.email || "-"}
+                </td>
+
+                <td>
+                    ${booking.date || "-"}
+                </td>
+
+                <td>
+                    ${booking.travelers || "-"}
+                </td>
+
+                <td>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteBooking(${realIndex})">
+
+                        Delete
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        `;
+
+    });
+
+}
+
+
+/* =========================================
+   DELETE BOOKING
+========================================= */
+
+function deleteBooking(index){
+
+    if(
+        !confirm(
+            "Are you sure you want to delete this booking?"
+        )
+    ){
+        return;
+    }
+
+    const bookings =
+        getBookings();
+
+    bookings.splice(index,1);
+
+    localStorage.setItem(
+        "lankaBookings",
+        JSON.stringify(bookings)
+    );
+
+    renderBookings();
+    updateDashboard();
+
+}
+
+
+/* =========================================
+   SECTION NAVIGATION
+========================================= */
+
+function showSection(sectionId,button){
+
+    document
+        .querySelectorAll(".section")
+        .forEach(section => {
+
+            section.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(sectionId)
+        .classList.add("active");
+
+
+    document
+        .querySelectorAll(".menu button")
+        .forEach(btn => {
+
+            btn.classList.remove("active");
+
+        });
+
+
+    if(button){
+        button.classList.add("active");
+    }
+
+
+    const titles = {
+
+        dashboard:"Dashboard",
+
+        users:"Users",
+
+        bookings:"Bookings",
+
+        destinations:"Destinations",
+
+        messages:"Messages"
+
+    };
+
+
+    document.getElementById("pageTitle")
+        .textContent =
+        titles[sectionId] || "Dashboard";
+
+
+    if(sectionId === "users"){
+        renderUsers();
+    }
+
+    if(sectionId === "bookings"){
+        renderBookings();
+    }
+
+
+    /* Close mobile sidebar */
+
+    document
+        .getElementById("sidebar")
+        .classList.remove("open");
+
+}
+
+
+function showSectionByName(sectionId){
+
+    const buttons =
+        document.querySelectorAll(".menu button");
+
+    let targetButton = null;
+
+    buttons.forEach(button => {
+
+        if(
+            button
+            .getAttribute("onclick")
+            ?.includes("'" + sectionId + "'")
+        ){
+            targetButton = button;
+        }
+
+    });
+
+    showSection(
+        sectionId,
+        targetButton
+    );
+
+}
+
+
+/* =========================================
+   MOBILE SIDEBAR
+========================================= */
+
+function toggleSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+function logout(){
+
+    if(
+        !confirm(
+            "Do you want to logout?"
+        )
+    ){
+        return;
+    }
+
+    localStorage.removeItem("lankaUser");
+
+    window.location.href =
+        "login.html";
+
+}
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+updateDashboard();
+
+</script>
+
+</body>
+</html>

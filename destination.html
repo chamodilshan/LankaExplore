@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Destination | LankaExplore
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body class="destination-page">
+
+
+<header class="navbar">
+
+    <div class="logo">
+
+        Lanka<span>Explore</span>
+
+    </div>
+
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="index.html#destinations">
+            Destinations
+        </a>
+
+        <a href="index.html#tours">
+            Tours
+        </a>
+
+        <a href="index.html#hotels">
+            Hotels
+        </a>
+
+    </nav>
+
+</header>
+
+
+
+<main>
+
+    <section
+        class="destination-hero"
+        id="destinationHero"
+    >
+
+        <div class="destination-overlay">
+
+            <div>
+
+                <p
+                    class="destination-location"
+                    id="destinationLocation"
+                >
+                    SRI LANKA
+                </p>
+
+
+                <h1 id="destinationTitle">
+                    Explore Sri Lanka
+                </h1>
+
+
+                <p
+                    id="destinationDescription"
+                >
+                    Discover an unforgettable destination.
+                </p>
+
+
+                <button
+                    class="primary-btn"
+                    onclick="bookDestination()"
+                >
+                    Book This Destination
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <section class="destination-content">
+
+        <div class="destination-main">
+
+            <p class="small-title">
+                DISCOVER
+            </p>
+
+            <h2 id="destinationHeading">
+                Destination
+            </h2>
+
+            <p id="destinationLongText">
+                Discover the beauty of Sri Lanka.
+            </p>
+
+
+            <h3>
+                Things To Do
+            </h3>
+
+
+            <div
+                class="activity-grid"
+                id="activityList"
+            ></div>
+
+        </div>
+
+
+
+        <aside class="destination-info">
+
+            <div class="info-box">
+
+                <span>
+                    BEST TIME
+                </span>
+
+                <strong id="bestTime">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <span>
+                    ESTIMATED BUDGET
+                </span>
+
+                <strong id="budget">
+                    -
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <span>
+                    LOCATION
+                </span>
+
+                <strong id="infoLocation">
+                    -
+                </strong>
+
+            </div>
+
+        </aside>
+
+    </section>
+
+</main>
+
+
+
+<script>
+
+const destination =
+    JSON.parse(
+        localStorage.getItem(
+            "selectedDestination"
+        )
+    );
+
+
+if (!destination) {
+
+    window.location.href =
+        "index.html";
+
+}
+
+
+document.title =
+    destination.title +
+    " | LankaExplore";
+
+
+document.getElementById(
+    "destinationTitle"
+).textContent =
+    destination.title;
+
+
+document.getElementById(
+    "destinationHeading"
+).textContent =
+    destination.title;
+
+
+document.getElementById(
+    "destinationLocation"
+).textContent =
+    destination.location;
+
+
+document.getElementById(
+    "infoLocation"
+).textContent =
+    destination.location;
+
+
+document.getElementById(
+    "destinationDescription"
+).textContent =
+    destination.description;
+
+
+document.getElementById(
+    "destinationLongText"
+).textContent =
+    destination.description;
+
+
+document.getElementById(
+    "bestTime"
+).textContent =
+    destination.bestTime;
+
+
+document.getElementById(
+    "budget"
+).textContent =
+    destination.budget;
+
+
+// Background image
+
+document.getElementById(
+    "destinationHero"
+).style.backgroundImage =
+    `url("${destination.image}")`;
+
+
+// Activities
+
+const activityList =
+    document.getElementById(
+        "activityList"
+    );
+
+
+destination.activities.forEach(
+    function(activity) {
+
+        const card =
+            document.createElement(
+                "div"
+            );
+
+        card.className =
+            "activity-card";
+
+        card.innerHTML = `
+
+            <span>✦</span>
+
+            <strong>
+                ${activity}
+            </strong>
+
+        `;
+
+        activityList.appendChild(card);
+
+    }
+);
+
+
+// Booking
+
+function bookDestination() {
+
+    localStorage.setItem(
+        "bookingPlace",
+        destination.title
+    );
+
+    window.location.href =
+        "index.html#destinations";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

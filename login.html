@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | LankaExplore</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(255, 122, 0, 0.20),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 80%,
+                    rgba(255, 122, 0, 0.12),
+                    transparent 30%
+                ),
+                #080808;
+
+            color: white;
+
+            overflow: hidden;
+        }
+
+
+        /* Background */
+
+        .background-circle {
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .circle1 {
+            width: 350px;
+            height: 350px;
+
+            top: -170px;
+            left: -120px;
+
+            background: rgba(255, 122, 0, 0.08);
+        }
+
+        .circle2 {
+            width: 320px;
+            height: 320px;
+
+            bottom: -160px;
+            right: -120px;
+
+            background: rgba(255, 122, 0, 0.08);
+        }
+
+
+        /* Login */
+
+        .login-container {
+            width: 100%;
+            max-width: 430px;
+
+            padding: 20px;
+
+            position: relative;
+            z-index: 10;
+        }
+
+
+        .login-card {
+
+            padding: 42px 35px;
+
+            border-radius: 25px;
+
+            background: rgba(21, 21, 21, 0.90);
+
+            border: 1px solid rgba(255, 122, 0, 0.25);
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.60),
+                0 0 40px rgba(255, 122, 0, 0.08);
+
+            backdrop-filter: blur(20px);
+        }
+
+
+        /* Logo */
+
+        .logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .logo-icon {
+
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 15px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 20px;
+
+            background: linear-gradient(
+                135deg,
+                #ff7a00,
+                #ff9d42
+            );
+
+            font-size: 32px;
+            font-weight: 800;
+
+            box-shadow:
+                0 12px 35px rgba(255, 122, 0, 0.30);
+
+            transform: rotate(-5deg);
+        }
+
+
+        .logo h1 {
+
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .logo h1 span {
+            color: #ff7a00;
+        }
+
+        .logo p {
+
+            margin-top: 6px;
+
+            color: #999;
+
+            font-size: 13px;
+        }
+
+
+        /* Form */
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+
+            color: #ddd;
+        }
+
+
+        .input-box {
+            position: relative;
+        }
+
+
+        .input-box input {
+
+            width: 100%;
+            height: 53px;
+
+            padding: 0 48px 0 16px;
+
+            border-radius: 13px;
+
+            border: 1px solid #333;
+
+            outline: none;
+
+            background: #0d0d0d;
+
+            color: white;
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 14px;
+
+            transition: 0.25s;
+        }
+
+
+        .input-box input:focus {
+
+            border-color: #ff7a00;
+
+            box-shadow:
+                0 0 0 3px rgba(255, 122, 0, 0.10);
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            right: 16px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #777;
+
+            font-size: 17px;
+        }
+
+
+        /* Password */
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: none;
+
+            color: #777;
+
+            cursor: pointer;
+
+            font-size: 15px;
+        }
+
+        .password-toggle:hover {
+            color: #ff7a00;
+        }
+
+
+        /* Options */
+
+        .options {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 24px;
+
+            font-size: 12px;
+        }
+
+
+        .remember {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #aaa;
+        }
+
+
+        .remember input {
+
+            accent-color: #ff7a00;
+
+            cursor: pointer;
+        }
+
+
+        .forgot {
+
+            color: #ff9d42;
+
+            text-decoration: none;
+        }
+
+        .forgot:hover {
+            text-decoration: underline;
+        }
+
+
+        /* Login button */
+
+        .login-button {
+
+            width: 100%;
+            height: 53px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff7a00,
+                    #ff9d42
+                );
+
+            color: white;
+
+            font-family: "Poppins", sans-serif;
+
+            font-size: 15px;
+
+            font-weight: 600;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+            box-shadow:
+                0 12px 30px rgba(255, 122, 0, 0.20);
+        }
+
+
+        .login-button:hover {
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 16px 35px rgba(255, 122, 0, 0.30);
+        }
+
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+
+        /* Error */
+
+        .error {
+
+            display: none;
+
+            padding: 11px;
+
+            margin-bottom: 18px;
+
+            border-radius: 10px;
+
+            background: rgba(255, 50, 50, 0.10);
+
+            border: 1px solid rgba(255, 50, 50, 0.25);
+
+            color: #ff7777;
+
+            font-size: 12px;
+
+            text-align: center;
+        }
+
+
+        /* Demo */
+
+        .demo {
+
+            margin-top: 23px;
+
+            padding: 13px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255, 122, 0, 0.06);
+
+            border:
+                1px solid rgba(255, 122, 0, 0.12);
+
+            text-align: center;
+
+            font-size: 11px;
+
+            line-height: 1.7;
+
+            color: #999;
+        }
+
+
+        .demo strong {
+            color: #ff9d42;
+        }
+
+
+        /* Back */
+
+        .back {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #888;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            transition: 0.2s;
+        }
+
+
+        .back:hover {
+            color: #ff7a00;
+        }
+
+
+        /* Mobile */
+
+        @media (max-width: 480px) {
+
+            .login-container {
+                padding: 15px;
+            }
+
+            .login-card {
+
+                padding: 32px 23px;
+
+                border-radius: 20px;
+            }
+
+            .logo h1 {
+                font-size: 24px;
+            }
+
+            .logo-icon {
+
+                width: 62px;
+                height: 62px;
+
+                font-size: 28px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="background-circle circle1"></div>
+    <div class="background-circle circle2"></div>
+
+
+    <main class="login-container">
+
+        <div class="login-card">
+
+
+            <!-- LOGO -->
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    L
+                </div>
+
+                <h1>
+                    Lanka<span>Explore</span>
+                </h1>
+
+                <p>
+                    Explore Sri Lanka. Discover More.
+                </p>
+
+            </div>
+
+
+            <!-- LOGIN FORM -->
+
+            <form id="loginForm">
+
+
+                <div
+                    id="errorMessage"
+                    class="error">
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                        <span class="input-icon">
+                            ✉
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-box">
+
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="Enter your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            id="togglePassword"
+                            class="password-toggle"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- OPTIONS -->
+
+                <div class="options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            id="remember"
+                        >
+
+                        Remember me
+
+                    </label>
+
+
+                    <a
+                        href="#"
+                        class="forgot"
+                    >
+                        Forgot password?
+                    </a>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+                    Sign In
+                </button>
+
+
+            </form>
+
+
+            <!-- DEMO ACCOUNT -->
+
+            <div class="demo">
+
+                <strong>Demo Admin Account</strong>
+
+                <br>
+
+                Email:
+                admin@lankaexplore.lk
+
+                <br>
+
+                Password:
+                admin123
+
+            </div>
+
+
+            <!-- BACK -->
+
+            <a
+                href="index.html"
+                class="back"
+            >
+                ← Back to LankaExplore
+            </a>
+
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const emailInput =
+            document.getElementById("email");
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const togglePassword =
+            document.getElementById("togglePassword");
+
+        const remember =
+            document.getElementById("remember");
+
+        const errorMessage =
+            document.getElementById("errorMessage");
+
+
+        /* ============================
+           SHOW / HIDE PASSWORD
+        ============================ */
+
+        togglePassword.addEventListener(
+            "click",
+            function () {
+
+                if (
+                    passwordInput.type === "password"
+                ) {
+
+                    passwordInput.type = "text";
+
+                    togglePassword.textContent = "🙈";
+
+                } else {
+
+                    passwordInput.type = "password";
+
+                    togglePassword.textContent = "👁";
+
+                }
+
+            }
+        );
+
+
+        /* ============================
+           REMEMBER EMAIL
+        ============================ */
+
+        const savedEmail =
+            localStorage.getItem(
+                "lankaRememberEmail"
+            );
+
+
+        if (savedEmail) {
+
+            emailInput.value = savedEmail;
+
+            remember.checked = true;
+
+        }
+
+
+        /* ============================
+           LOGIN
+        ============================ */
+
+        loginForm.addEventListener(
+            "submit",
+            function (event) {
+
+                event.preventDefault();
+
+
+                const email =
+                    emailInput.value
+                        .trim()
+                        .toLowerCase();
+
+                const password =
+                    passwordInput.value.trim();
+
+
+                /* ADMIN LOGIN */
+
+                if (
+                    email ===
+                    "admin@lankaexplore.lk"
+                    &&
+                    password === "admin123"
+                ) {
+
+
+                    const adminUser = {
+
+                        name:
+                            "LankaExplore Admin",
+
+                        email:
+                            email,
+
+                        role:
+                            "admin"
+
+                    };
+
+
+                    localStorage.setItem(
+
+                        "lankaUser",
+
+                        JSON.stringify(
+                            adminUser
+                        )
+
+                    );
+
+
+                    if (remember.checked) {
+
+                        localStorage.setItem(
+
+                            "lankaRememberEmail",
+
+                            email
+
+                        );
+
+                    } else {
+
+                        localStorage.removeItem(
+                            "lankaRememberEmail"
+                        );
+
+                    }
+
+
+                    window.location.href =
+                        "admin.html";
+
+
+                    return;
+
+                }
+
+
+                /* NORMAL USER LOGIN */
+
+                if (
+                    email !== "" &&
+                    password.length >= 4
+                ) {
+
+
+                    const normalUser = {
+
+                        name:
+                            email.split("@")[0],
+
+                        email:
+                            email,
+
+                        role:
+                            "user"
+
+                    };
+
+
+                    localStorage.setItem(
+
+                        "lankaUser",
+
+                        JSON.stringify(
+                            normalUser
+                        )
+
+                    );
+
+                    /* Keep a local registered-user list for the demo admin dashboard. */
+                    let users = [];
+                    try {
+                        users = JSON.parse(localStorage.getItem("lankaUsers") || "[]");
+                        if (!Array.isArray(users)) users = [];
+                    } catch (error) {
+                        users = [];
+                    }
+
+                    const existingUser = users.find(
+                        user => user.email === normalUser.email
+                    );
+
+                    if (existingUser) {
+                        existingUser.name = normalUser.name;
+                        existingUser.role = normalUser.role;
+                        existingUser.lastLogin = new Date().toISOString();
+                    } else {
+                        users.push({
+                            ...normalUser,
+                            createdAt: new Date().toISOString(),
+                            lastLogin: new Date().toISOString()
+                        });
+                    }
+
+                    localStorage.setItem("lankaUsers", JSON.stringify(users));
+
+
+                    if (remember.checked) {
+
+                        localStorage.setItem(
+
+                            "lankaRememberEmail",
+
+                            email
+
+                        );
+
+                    } else {
+
+                        localStorage.removeItem(
+                            "lankaRememberEmail"
+                        );
+
+                    }
+
+
+                    window.location.href =
+                        "index.html";
+
+
+                    return;
+
+                }
+
+
+                /* ERROR */
+
+                errorMessage.style.display =
+                    "block";
+
+                errorMessage.textContent =
+                    "Please enter a valid email and password.";
+
+            }
+        );
+
+
+        /* ============================
+           REMOVE ERROR
+        ============================ */
+
+        emailInput.addEventListener(
+            "input",
+            function () {
+
+                errorMessage.style.display =
+                    "none";
+
+            }
+        );
+
+
+        passwordInput.addEventListener(
+            "input",
+            function () {
+
+                errorMessage.style.display =
+                    "none";
+
+            }
+        );
+
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LankaExplore | Discover Sri Lanka</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Leaflet Map CSS -->
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Leaflet Map JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            Lanka<span>Explore</span>
+        </div>
+
+        <nav id="navMenu">
+
+            <a href="#home">Home</a>
+            <a href="#destinations">Destinations</a>
+            <a href="#tours">Tours</a>
+            <a href="#hotels">Hotels</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
+
+        </nav>
+
+        <button class="menu-btn" onclick="toggleMenu()">
+            ☰
+        </button>
+
+    </header>
+    
+
+
+    <!-- ================= HERO ================= -->
+
+    <section id="home" class="hero">
+
+        <div class="hero-content">
+
+            <p class="small-title">
+                WELCOME TO SRI LANKA
+            </p>
+
+            <h1>
+                EXPLORE
+                <span>THE PEARL</span>
+            </h1>
+
+            <p class="description">
+
+                Discover tropical beaches, ancient kingdoms,
+                misty mountains and unforgettable adventures
+                across the beautiful island of Sri Lanka.
+
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#destinations" class="primary-btn">
+                    Explore Sri Lanka
+                </a>
+
+                <a href="#tours" class="secondary-btn">
+                    View Tours
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- 3D EARTH -->
+
+        <div class="earth-container">
+
+            <div id="earth"></div>
+
+            <div class="earth-glow"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= STATS ================= -->
+
+    <section class="stats">
+
+        <div>
+            <strong>9</strong>
+            <span>Provinces</span>
+        </div>
+
+        <div>
+            <strong>8</strong>
+            <span>UNESCO Sites</span>
+        </div>
+
+        <div>
+            <strong>1340</strong>
+            <span>KM Coastline</span>
+        </div>
+
+        <div>
+            <strong>26+</strong>
+            <span>National Parks</span>
+        </div>
+
+    </section>
+
+
+    <!-- ================= DESTINATIONS ================= -->
+
+    <section id="destinations" class="section">
+
+        <div class="section-title">
+
+            <p>DISCOVER</p>
+
+            <h2>Popular Destinations</h2>
+
+        </div>
+
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="destinationSearch"
+                placeholder="Search destination..."
+                onkeyup="searchDestinations()"
+            >
+
+            🔍
+
+        </div>
+
+
+        <div class="destination-grid" id="destinationGrid">
+
+
+            <div class="destination-card"
+                 data-name="sigiriya">
+
+                <div class="destination-image sigiriya"></div>
+
+                <div class="destination-info">
+
+                    <span>Central Province</span>
+
+                    <h3>Sigiriya</h3>
+
+                    <p>
+                        Ancient Rock Fortress
+                    </p>
+
+                    <button onclick="openBooking('Sigiriya')">
+                        Explore
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="destination-card"
+                 data-name="ella">
+
+                <div class="destination-image ella"></div>
+
+                <div class="destination-info">
+
+                    <span>Uva Province</span>
+
+                    <h3>Ella</h3>
+
+                    <p>
+                        Misty Mountain Escape
+                    </p>
+
+                    <button onclick="openBooking('Ella')">
+                        Explore
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="destination-card"
+                 data-name="galle">
+
+                <div class="destination-image galle"></div>
+
+                <div class="destination-info">
+
+                    <span>Southern Province</span>
+
+                    <h3>Galle</h3>
+
+                    <p>
+                        Historic Coastal City
+                    </p>
+
+                    <button onclick="openBooking('Galle')">
+                        Explore
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="destination-card"
+                 data-name="yala">
+
+                <div class="destination-image yala"></div>
+
+                <div class="destination-info">
+
+                    <span>Southern Province</span>
+
+                    <h3>Yala</h3>
+
+                    <p>
+                        Wildlife Adventure
+                    </p>
+
+                    <button onclick="openBooking('Yala')">
+                        Explore
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="destination-card"
+                 data-name="mirissa">
+
+                <div class="destination-image mirissa"></div>
+
+                <div class="destination-info">
+
+                    <span>Southern Province</span>
+
+                    <h3>Mirissa</h3>
+
+                    <p>
+                        Tropical Beach Paradise
+                    </p>
+
+                    <button onclick="openBooking('Mirissa')">
+                        Explore
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="destination-card"
+                 data-name="nuwara eliya">
+
+                <div class="destination-image nuwara"></div>
+
+                <div class="destination-info">
+
+                    <span>Central Province</span>
+
+                    <h3>Nuwara Eliya</h3>
+
+                    <p>
+                        Little England
+                    </p>
+
+                    <button onclick="openBooking('Nuwara Eliya')">
+                        Explore
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+    <!-- ================= INTERACTIVE SRI LANKA MAP ================= -->
+
+<section id="map" class="map-section">
+
+    <div class="section-title">
+
+        <p>EXPLORE ON THE MAP</p>
+
+        <h2>Interactive Sri Lanka</h2>
+
+        <span>
+            Click a glowing destination to discover more.
+        </span>
+
+    </div>
+
+
+    <div class="map-wrap">
+
+        <div id="sriLankaMap"></div>
+
+
+        <div class="map-overlay-card">
+
+            <div class="map-live-dot"></div>
+
+            <div>
+
+                <strong>
+                    Explore Sri Lanka
+                </strong>
+
+                <p>
+                    Choose a destination on the map
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+    <!-- ================= EXPERIENCE ================= -->
+
+    <section class="experience">
+
+        <div class="experience-content">
+
+            <p>WHY SRI LANKA?</p>
+
+            <h2>
+                One Island.
+                <br>
+                Endless Experiences.
+            </h2>
+
+            <p class="experience-text">
+
+                From ancient temples to golden beaches,
+                wildlife safaris to mountain adventures,
+                Sri Lanka gives you everything within
+                one incredible island.
+
+            </p>
+
+        </div>
+
+        <div class="floating-cards">
+
+            <div class="float-card">
+                🏝️
+                <h3>Beaches</h3>
+                <p>Golden tropical shores</p>
+            </div>
+
+            <div class="float-card">
+                🐘
+                <h3>Wildlife</h3>
+                <p>Meet Sri Lankan giants</p>
+            </div>
+
+            <div class="float-card">
+                🏔️
+                <h3>Mountains</h3>
+                <p>Explore misty highlands</p>
+            </div>
+
+            <div class="float-card">
+                🏛️
+                <h3>Heritage</h3>
+                <p>Discover ancient history</p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= TOURS ================= -->
+
+    <section id="tours" class="section">
+
+        <div class="section-title">
+
+            <p>TRAVEL PACKAGES</p>
+
+            <h2>Popular Tours</h2>
+
+        </div>
+
+
+        <div class="tour-grid">
+
+            <div class="tour-card">
+
+                <div class="tour-icon">
+                    🏝️
+                </div>
+
+                <h3>Beach Escape</h3>
+
+                <p>
+                    Mirissa • Galle • Bentota
+                </p>
+
+                <strong>
+                    4 Days / 3 Nights
+                </strong>
+
+                <button onclick="openBooking('Beach Escape')">
+                    Book Tour
+                </button>
+
+            </div>
+
+
+            <div class="tour-card featured">
+
+                <div class="tour-icon">
+                    🏔️
+                </div>
+
+                <h3>Hill Country</h3>
+
+                <p>
+                    Kandy • Nuwara Eliya • Ella
+                </p>
+
+                <strong>
+                    5 Days / 4 Nights
+                </strong>
+
+                <button onclick="openBooking('Hill Country')">
+                    Book Tour
+                </button>
+
+            </div>
+
+
+            <div class="tour-card">
+
+                <div class="tour-icon">
+                    🐘
+                </div>
+
+                <h3>Wild Sri Lanka</h3>
+
+                <p>
+                    Yala • Udawalawe • Ella
+                </p>
+
+                <strong>
+                    6 Days / 5 Nights
+                </strong>
+
+                <button onclick="openBooking('Wild Sri Lanka')">
+                    Book Tour
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= HOTELS ================= -->
+
+    <section id="hotels" class="hotels-section">
+
+        <div class="section-title">
+
+            <p>STAY IN PARADISE</p>
+
+            <h2>Find Your Stay</h2>
+
+        </div>
+
+
+        <div class="hotel-search">
+
+            <input
+                type="text"
+                placeholder="Where do you want to stay?"
+            >
+
+            <select>
+
+                <option>Any Type</option>
+                <option>Hotel</option>
+                <option>Resort</option>
+                <option>Villa</option>
+                <option>Guest House</option>
+
+            </select>
+
+            <button class="primary-btn">
+                Search
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= GALLERY ================= -->
+
+    <section id="gallery" class="section">
+
+        <div class="section-title">
+
+            <p>VISUAL JOURNEY</p>
+
+            <h2>Sri Lanka Gallery</h2>
+
+        </div>
+
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item gallery-1">
+                <span>Sigiriya</span>
+            </div>
+
+            <div class="gallery-item gallery-2">
+                <span>Ella</span>
+            </div>
+
+            <div class="gallery-item gallery-3">
+                <span>Mirissa</span>
+            </div>
+
+            <div class="gallery-item gallery-4">
+                <span>Galle</span>
+            </div>
+
+            <div class="gallery-item gallery-5">
+                <span>Yala</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= REVIEWS ================= -->
+
+    <section class="reviews">
+
+        <div class="section-title">
+
+            <p>TRAVEL STORIES</p>
+
+            <h2>What Travelers Say</h2>
+
+        </div>
+
+
+        <div class="review-grid">
+
+            <div class="review">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "Sri Lanka was one of the most beautiful
+                    travel experiences of my life."
+                </p>
+
+                <strong>
+                    — Alex, UK
+                </strong>
+
+            </div>
+
+
+            <div class="review">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "Amazing beaches, friendly people and
+                    incredible food."
+                </p>
+
+                <strong>
+                    — Maria, Germany
+                </strong>
+
+            </div>
+
+
+            <div class="review">
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    "Ella and Sigiriya were absolutely
+                    unforgettable."
+                </p>
+
+                <strong>
+                    — Daniel, Australia
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CTA ================= -->
+
+    <section class="cta">
+
+        <h2>
+            Ready to Explore Sri Lanka?
+        </h2>
+
+        <p>
+            Your next adventure is waiting.
+        </p>
+
+        <a href="#destinations" class="primary-btn">
+            Start Exploring
+        </a>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer id="contact">
+
+        <h2>
+            Lanka<span>Explore</span>
+        </h2>
+
+        <p>
+            Discover the Pearl of the Indian Ocean.
+        </p>
+
+        <div class="footer-links">
+
+            <a href="#home">Home</a>
+            <a href="#destinations">Destinations</a>
+            <a href="#tours">Tours</a>
+            <a href="#hotels">Hotels</a>
+            <a href="#contact">Contact</a>
+
+        </div>
+
+        <p class="copyright">
+            © 2026 LankaExplore. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- ================= BOOKING POPUP ================= -->
+
+    <div class="modal" id="bookingModal">
+
+        <div class="modal-box">
+
+            <button class="close-btn"
+                    onclick="closeBooking()">
+                ×
+            </button>
+
+            <p>PLAN YOUR TRIP</p>
+
+            <h2 id="bookingTitle">
+                Book Your Adventure
+            </h2>
+
+            <form onsubmit="submitBooking(event)">
+
+                <input
+                    type="text"
+                    placeholder="Your Name"
+                    required
+                >
+
+                <input
+                    type="email"
+                    placeholder="Email Address"
+                    required
+                >
+
+                <input
+                    type="date"
+                    required
+                >
+
+                <input
+                    type="number"
+                    placeholder="Number of Travelers"
+                    min="1"
+                    required
+                >
+
+                <button class="primary-btn">
+                    Send Booking Request
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
